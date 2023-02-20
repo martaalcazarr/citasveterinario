@@ -1,8 +1,12 @@
 const PasswordOlvidada = () =>{
     return(
         <>
-        <h1>Desde PasswordOlvidada</h1></>
-    )
+        
+            <div>1</div>
+            <div>2</div>
+           
+            </>
+        )
 }
 
 export default PasswordOlvidada;
