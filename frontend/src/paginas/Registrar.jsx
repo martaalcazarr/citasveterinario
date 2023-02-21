@@ -24,17 +24,18 @@ const Registrar = () => {
             setAlerta({msg: 'La contraseña es muy corta, debe tener mínimo 6 carácteres', error:true})
             return;
         }
+        setAlerta({})
     }
    
-
+    const {msg} = alerta
     return (
         <>
         <div>
             <h1 className="text-indigo-600 font-black text-6xl">Crea tu cuenta y administra tus {""} <span className="text-black">pacientes</span></h1>
         </div>
         <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
-            <Alerta 
-            alerta={alerta}/>
+            {msg && <Alerta 
+            alerta={alerta}/>}
             <form 
             onSubmit={handleSubmit}>
             <div className="my-5">
