@@ -25,6 +25,9 @@ const Registrar = () => {
             return;
         }
         setAlerta({})
+
+        //crear el usuario en la api
+        
     }
    
     const {msg} = alerta
