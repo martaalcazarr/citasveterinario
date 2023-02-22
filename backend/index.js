@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from 'dotenv';
+import cors from 'cors';
 import conectarDB from "./config/db.js";
 import veterinarioRoutes from './routes/veterinarioRoutes.js';
 import pacienteRoutes from './routes/pacienteRoutes.js';
@@ -9,6 +10,22 @@ app.use(express.json());
 
 dotenv.config();
 conectarDB();
+
+const dominiosPermitidos = ['http://localhost:4000' || 'http://localhost:5173']
+const corsOptions = {
+    origin: function(origin, callback){
+        //si el origen está dentro de los dominios permitidos y !== -1 significa que lo encontró
+        if(dominiosPermitidos.indexOf(origin) !== -1){
+            //el origen del req está permitido
+            //null es para el error, y true que si
+            callback(null, true)
+        }else{
+            callback(new Error('No permitido por Cors'))
+        }
+    }
+}
+app.use(cors({ origin: '*' }))
+app.use(cors(corsOptions))
 
 app.use('/api/veterinarios', veterinarioRoutes);
 app.use('/api/pacientes', pacienteRoutes);
