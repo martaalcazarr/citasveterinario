@@ -50,6 +50,7 @@ const actualizarPaciente = async (req, res) =>{
     paciente.email = req.body.email || paciente.email;
     paciente.fecha = req.body.fecha || paciente.fecha;
     paciente.sintomas = req.body.sintomas || paciente.sintomas;
+    
     try {
         const pacienteActualizado = await paciente.save();
         res.json(pacienteActualizado);
