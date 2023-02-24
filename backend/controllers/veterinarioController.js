@@ -1,12 +1,13 @@
 import Veterinario from "../models/Veterinario.js";
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
+import emailRegistro from "../helpers/emailRegistro.js";
 
 const registrar = async (req, res)=> {
     
     //const {nombre, email, password} = req.body
     //prevenir usuarios duplicados
-    const {email} = req.body;
+    const {email, nombre} = req.body;
     //findone para buscar por los diferentes atributos
     const existeUsuario = await Veterinario.findOne({email});
     if(existeUsuario){
@@ -19,6 +20,13 @@ const registrar = async (req, res)=> {
         const veterinario = new Veterinario(req.body);
         //.save() es de mongoose
         const veterinarioGuardado = await veterinario.save()
+        //enviar email
+        emailRegistro({
+            email,
+            nombre,
+            token: veterinarioGuardado.token
+        });
+
         res.json(veterinarioGuardado)
     }catch(error){
         console.log(error)
