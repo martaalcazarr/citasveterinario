@@ -6,6 +6,7 @@ import ConfirmarCuenta from './paginas/ConfirmarCuenta';
 import PasswordOlvidada from './paginas/PasswordOlvidada';
 
 function App() {
+  console.log(import.meta.env.VITE_BACKEND_URL)
   return(
     <BrowserRouter>
     <Routes>
