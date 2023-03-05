@@ -4,6 +4,7 @@ import Login from './paginas/Login';
 import Registrar from './paginas/Registrar';
 import ConfirmarCuenta from './paginas/ConfirmarCuenta';
 import PasswordOlvidada from './paginas/PasswordOlvidada';
+import NuevoPassword from './paginas/NuevaPassword';
 
 function App() {
   console.log(import.meta.env.VITE_BACKEND_URL)
@@ -17,6 +18,7 @@ function App() {
         {/*para agregar paginas hijo a la principal*/}
         <Route path='registrar' element={<Registrar/>}/>
         <Route path='password-olvidada' element={<PasswordOlvidada/>}/>
+        <Route path='password-olvidada/:token' element={<NuevoPassword/>}/>
         <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
       </Route>
     </Routes>
