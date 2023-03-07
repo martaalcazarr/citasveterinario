@@ -25,4 +25,4 @@ const emailPasswordOlvidada = async (datos) => {
       console.log("mensaje enviado : %s", info.messageId)
 }
 
-export default emailRegistro;
+export default emailPasswordOlvidada;
