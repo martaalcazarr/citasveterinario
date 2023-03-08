@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 import Alerta from "../components/Alerta";
 import clienteAxios from "../config/axios";
 
@@ -7,6 +7,7 @@ const NuevaPassword = () => {
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
     const [tokenValido, setTokenValido] = useState(false)
+    const [passwordModificada, setPasswordModificada] = useState(false)
 
     const params = useParams()
     const {token} = params
@@ -29,6 +30,31 @@ const NuevaPassword = () => {
         comprobarToken()
     }, [])
 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if(password.length < 6){
+            setAlerta({
+            msg: 'La contraseña debe tener más de 6 carácteres',
+            error: true
+            })
+            return
+        }
+        try {
+            const url = `/veterinarios/password-olvidada/${token}`
+            const {data} = await clienteAxios.post(url, {password})
+            console.log(data)
+            setAlerta({
+                msg: data.msg
+            })
+            setPasswordModificada(true)
+        } catch (error) {
+            setAlerta({
+                msg: error.response.data.msg,
+                error: true
+            })
+        }
+    }
+
     const {msg} = alerta
 
     return(
@@ -40,7 +66,8 @@ const NuevaPassword = () => {
             {msg && <Alerta 
             alerta={alerta}/>} 
             {tokenValido && (
-            <form>
+                <>
+            <form onSubmit={handleSubmit}>
             
                 <div className="my-5">
                     <label className="uppercase text-gray-600 block text-xl font-bold">
@@ -63,7 +90,13 @@ const NuevaPassword = () => {
                 />
                
             </form>
+              
+           
+                </>
             )}
+            {passwordModificada && 
+             <Link className='block text-center my-5 text-gray-500'
+             to="/">Iniciar sesión</Link>}
         </div>
         </>
     )
