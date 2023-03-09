@@ -3,9 +3,12 @@ import {Link} from 'react-router-dom';
 import Alerta from '../components/Alerta';
 import clienteAxios from '../config/axios';
 
+
 const PasswordOlvidada = () =>{
     const [email, setEmail] = useState('')
     const [alerta, setAlerta] = useState({})
+
+    
 
     const handleSubmit = async e =>{
         e.preventDefault()
