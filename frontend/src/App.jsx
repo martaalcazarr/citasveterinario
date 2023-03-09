@@ -1,11 +1,15 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import AuthLayout from './layout/AuthLayout';
+import RutaProtegida from './layout/RutaProtegida';
+
 import Login from './paginas/Login';
 import Registrar from './paginas/Registrar';
 import ConfirmarCuenta from './paginas/ConfirmarCuenta';
 import PasswordOlvidada from './paginas/PasswordOlvidada';
 import NuevaPassword from './paginas/NuevaPassword';
-import {AuthProvider}  from './context/AuthProvider'
+import AdministrarPacientes from './paginas/AdministrarPacientes';
+
+import {AuthProvider}  from './context/AuthProvider';
 
 function App() {
   console.log(import.meta.env.VITE_BACKEND_URL)
@@ -22,6 +26,10 @@ function App() {
         <Route path='password-olvidada' element={<PasswordOlvidada/>}/>
         <Route path='password-olvidada/:token' element={<NuevaPassword/>}/>
         <Route path='confirmar/:id' element={<ConfirmarCuenta/>}/>
+      </Route>
+
+      <Route path='/admin' element={<RutaProtegida/>}>
+        <Route index element={<AdministrarPacientes/>} />
       </Route>
     </Routes>
     </AuthProvider>
