@@ -15,9 +15,9 @@ const dominiosPermitidos = ['http://localhost:4000', process.env.FRONTEND_URL]
 //
 const corsOptions = {
     origin: function(origin, callback){
-        //si el origen está dentro de los dominios permitidos y !== -1 significa que lo encontró
+//        //si el origen está dentro de los dominios permitidos y !== -1 significa que lo encontró
         if(dominiosPermitidos.indexOf(origin) !== -1){
-            //el origen del req está permitido
+//            //el origen del req está permitido
             //null es para el error, y true que si
             callback(null, true)
         }else{
@@ -25,7 +25,7 @@ const corsOptions = {
         }
     }
 }
-app.use(cors({ origin: '*' }))
+//app.use(cors({ origin: '*' }))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions))
