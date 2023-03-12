@@ -10,12 +10,14 @@ import NuevaPassword from './paginas/NuevaPassword';
 import AdministrarPacientes from './paginas/AdministrarPacientes';
 
 import {AuthProvider}  from './context/AuthProvider';
+import {PacientesProvider} from './context/PacientesProvider'
 
 function App() {
   console.log(import.meta.env.VITE_BACKEND_URL)
   return(
     <BrowserRouter>
     <AuthProvider>
+    <PacientesProvider>
     <Routes>
       {/*pagina del diseño*/}
       <Route path='/' element={<AuthLayout/>}>
@@ -32,6 +34,7 @@ function App() {
         <Route index element={<AdministrarPacientes/>} />
       </Route>
     </Routes>
+    </PacientesProvider>
     </AuthProvider>
     </BrowserRouter>
   )
