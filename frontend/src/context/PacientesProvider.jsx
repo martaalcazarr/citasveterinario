@@ -82,7 +82,8 @@ export const PacientesProvider = ({children}) => {
                     }
                 }
                 const {data} = await clienteAxios.delete(`/pacientes/${id}`, config)
-                console.log(data)
+                const pacientesActualizado = pacientes.filter(pacientesState => pacientesState._id !== id)
+                setPacientes(pacientesActualizado)
             } catch (error) {
                 console.log(error)
             }
