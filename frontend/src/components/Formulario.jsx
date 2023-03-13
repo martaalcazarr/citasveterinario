@@ -6,12 +6,12 @@ const Formulario = () => {
     const [nombre, setNombre] = useState('')
     const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
-    const [fecha, setFecha] = useState(Date.now())
+    const [fecha, setFecha] = useState('')
     const [sintomas, setSintomas] = useState('')
 
     const [alerta, setAlerta] = useState({})
 
-    const {pacientes} = usePacientes()
+    const {guardarPaciente} = usePacientes()
 
     
 
@@ -25,6 +25,8 @@ const Formulario = () => {
             })
             return
         }
+        setAlerta({})
+        guardarPaciente({nombre, propietario, email, fecha, sintomas})
     }
 
     const {msg} = alerta
@@ -91,7 +93,7 @@ const Formulario = () => {
             <label 
                 htmlFor="fecha"
                 className="text-gray-700 uppercase font-bold">
-                    Fecha
+                    Fecha de ingreso
             </label>
             <input 
                 id="fecha"
