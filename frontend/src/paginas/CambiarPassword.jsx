@@ -1,13 +1,35 @@
 import { useState } from "react"
 import AdminNav from "../components/AdminNav"
 import Alerta from "../components/Alerta"
+import useAuth from "../hooks/useAuth"
 
 const CambiarPassword = () => {
+
+  const {guardarPassword} = useAuth()
   
   const [alerta, setAlerta] = useState({})
+  const [password, setPassword]= useState({
+    pwd_actual: '',
+    pwd_nuevo: ''
+  })
 
   const handleSubmit = e=> {
     e.preventDefault()
+    if(Object.values(password).some(campo => campo === '')){
+      setAlerta({
+        msg: 'Todos los campos son obligatorios',
+        error: true
+      })
+      return
+    }
+    if(password.pwd_nuevo.length < 6){
+      setAlerta({
+        msg: 'La contraseña debe tener mínimo 6 carácteres',
+        error: true
+      })
+      return
+    }
+    guardarPassword(password)
   }
 
   const {msg} = alerta
@@ -33,33 +55,31 @@ const CambiarPassword = () => {
               <div className="my-3">
                 <label className="uppercase font-bold text-gray-600">Contraseña actual</label>
                   <input
-                  type="text"
+                  type="password"
                   className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
-                  name="nombre"
+                  name="pwd_actual"
                   placeholder="Escribe tu contraseña actual"
+                  onChange={e => setPassword({
+                    ...password,
+                    [e.target.name] : e.target.value
+                  })}
                  
                   />
               </div>
               <div className="my-3">
                 <label className="uppercase font-bold text-gray-600">Nueva contraseña</label>
                   <input
-                  type="text"
+                  type="password"
                   className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
-                  name="nombre"
+                  name="pwd_nuevo"
                   placeholder="Escribe tu nueva contraseña"
-                 
+                  onChange={e => setPassword({
+                    ...password,
+                    [e.target.name] : e.target.value
+                  })}
                   />
               </div>
-              <div className="my-3">
-                <label className="uppercase font-bold text-gray-600">Repetir nueva contraseña</label>
-                  <input
-                  type="text"
-                  className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
-                  name="nombre"
-                  placeholder="Repite tu nueva contraseña"
-                 
-                  />
-              </div>
+             
             
               <input 
                 type="submit"
