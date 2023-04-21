@@ -1,5 +1,7 @@
-# citasveterinario
+# Administrador de citas de veterinario
 MERN project
+
+## How to use
 
 1. open terminal
 
